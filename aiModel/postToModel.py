@@ -2,6 +2,35 @@ import json
 import requests
 
 def sendPrompt(model,prompt):
+    """
+    Sends a prompt to a model and prints the generated response.
+
+    This function sends a POST request to a local API endpoint with the specified model and prompt.
+    It handles the response text, which is received in multiple lines, splits the text by new lines,
+    parses each line as JSON (except the last line), and combines the responses into a single string.
+
+    The function performs the following steps:
+    1. Sets the URL of the model API endpoint.
+    2. Configures the request parameters with the model and prompt.
+    3. Sends a POST request to the API.
+    4. Receives and processes the raw response text.
+    5. Splits the response text by new lines, excluding the last line.
+    6. Parses each line (except the last) as JSON and collects the responses.
+    7. Combines all responses into a single string.
+    8. Prints the model being used, the prompt sent, and the combined response.
+
+    Args:
+        model (str): The model identifier to use for the API request.
+        prompt (str): The prompt text to send to the model.
+
+    Returns:
+        None
+
+    Raises:
+        requests.RequestException: If there is an issue with the HTTP request.
+        json.JSONDecodeError: If a line in the response cannot be parsed as JSON.
+    """
+    
     # Setting the url of the models
     URL = "http://localhost:10001/api/generate"
     # Setting the parameters

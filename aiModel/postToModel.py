@@ -63,6 +63,7 @@ def sendPrompt(model,prompt):
     for line in arrayOfText:
         fullText+=line["response"]
         
-    print(f'The model being used was: {model}\nThe prompt that was created: {prompt}\nResponse:\n\n{fullText}')
+    # print(f'The model being used was: {model}\nThe prompt that was created: {prompt}\nResponse:\n\n{fullText}')
+    return fullText
     pass
 

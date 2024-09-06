@@ -10,6 +10,8 @@ import transcribe.transcribeToText as transcribe  # Import transcribe module
 import transcribe.readTranscribedText as readInPrompt  # Import readInPrompt module
 import aiModel.postToModel as aiModel  # Import aiModel module
 
+
+torch.cuda.empty_cache()
 # Record audio and save it to 'output.wav'
 recording.recordAudio()
 
@@ -26,3 +28,4 @@ torch.cuda.empty_cache()
 aiResponse= aiModel.sendPrompt("gemma2:2b", "gimme a recipie for apple pie")
 # Creating a an mp3 file to play
 tts.createTextToSpeech(aiResponse)
+torch.cuda.empty_cache()

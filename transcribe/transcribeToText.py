@@ -1,4 +1,5 @@
 from faster_whisper import WhisperModel
+import torch
 
 def transcribeFile():
     """
@@ -18,11 +19,10 @@ def transcribeFile():
     Returns:
         None
     """
-    
-    model_size = "tiny"  # Choose the model size ('tiny', 'base', 'small', 'medium', 'large')
+    model_size = "large-v3"  # Choose the model size ('tiny', 'base', 'small', 'medium', 'large')
 
     # Initialize the Whisper model to run on GPU with FP16 precision
-    model = WhisperModel(model_size, device="cuda", compute_type="float16")
+    model = WhisperModel(model_size, device="cuda",device_index=0, compute_type="float16")
 
     # Transcribe the audio file and get segments and metadata
     segments, info = model.transcribe("./output.wav", beam_size=5)
@@ -43,4 +43,7 @@ def transcribeFile():
     # Save the transcribed text to a file
     with open('prompt.txt', 'w') as f:
         f.write(transcribedText)
+    
+    del model
+    torch.cuda.empty_cache()
     pass

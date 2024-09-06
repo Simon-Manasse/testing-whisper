@@ -1,5 +1,6 @@
 import json
 import requests
+import torch
 
 def sendPrompt(model,prompt):
     """
@@ -32,6 +33,7 @@ def sendPrompt(model,prompt):
     """
     
     # Setting the url of the models
+    torch.cuda.empty_cache()
     URL = "http://localhost:10001/api/generate"
     # Setting the parameters
     PARAMS = {
@@ -63,6 +65,7 @@ def sendPrompt(model,prompt):
     for line in arrayOfText:
         fullText+=line["response"]
         
+    torch.cuda.empty_cache()
     # print(f'The model being used was: {model}\nThe prompt that was created: {prompt}\nResponse:\n\n{fullText}')
     return fullText
     pass

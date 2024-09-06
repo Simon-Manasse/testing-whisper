@@ -11,8 +11,6 @@ import transcribe.readTranscribedText as readInPrompt  # Import readInPrompt mod
 import aiModel.postToModel as aiModel  # Import aiModel module
 
 
-torch.cuda.empty_cache()
-# Record audio and save it to 'output.wav'
 recording.recordAudio()
 
 # Transcribe the recorded audio file to text
@@ -21,11 +19,11 @@ transcribe.transcribeFile()
 # Read the transcribed text from 'prompt.txt'
 prompt = readInPrompt.readInPrompt()
 
-# Clear the CUDA memory cache
-torch.cuda.empty_cache()
+
 
 # Send the transcribed text to the AI model with a specific prompt ID
 aiResponse= aiModel.sendPrompt("gemma2:2b", "gimme a recipie for apple pie")
 # Creating a an mp3 file to play
 tts.createTextToSpeech(aiResponse)
 torch.cuda.empty_cache()
+

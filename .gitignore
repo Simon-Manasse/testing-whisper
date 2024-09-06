@@ -1,4 +1,5 @@
 venv/
+.venv/
 vosk-model-small-en-us-0.15.zip
 output.wav
 prompt.txt
